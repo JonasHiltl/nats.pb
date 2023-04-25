@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package nats.protoc_gen_nats.options;
+option go_package = "github.com/jonashiltl/grpc-nats/protoc-gen-nats/options";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MethodOptions {
+  optional string subject = 168718;
+}
