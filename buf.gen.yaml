@@ -3,7 +3,3 @@ plugins:
   - plugin: go
     out: .
     opt: paths=source_relative
-  - plugin: go-nats
-    out: .
-    opt: paths=source_relative
-    path: ./main

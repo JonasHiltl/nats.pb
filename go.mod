@@ -1,4 +1,4 @@
-module github.com/jonashiltl/grpc-nats
+module github.com/jonashiltl/proto-nats
 
 go 1.20
 

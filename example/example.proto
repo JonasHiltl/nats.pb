@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package nats.example;
-option go_package = "github.com/jonashiltl/grpc-nats/example";
+package proto.nats.example;
+option go_package = "github.com/jonashiltl/proto-nats/example";
 
 import "protoc-gen-nats/options/descriptor.proto";
 
@@ -12,5 +12,5 @@ message Hello {
 service YourService {
   rpc Echo(Hello) returns (Hello) {
     option (nats.protoc_gen_nats.options.subject) = "echo.echo";
-  }
+  };
 }
