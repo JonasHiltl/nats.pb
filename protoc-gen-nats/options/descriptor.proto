@@ -6,5 +6,9 @@ option go_package = "github.com/jonashiltl/proto-nats/protoc-gen-nats/options";
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
-  string subject = 168718;
+  NatsOptions nats = 168718;
+}
+
+message NatsOptions {
+  string subject = 1;
 }

@@ -11,6 +11,8 @@ message Hello {
 
 service ExampleService {
   rpc Echo(Hello) returns (Hello) {
-    option (nats.protoc_gen_nats.options.subject) = "echo.echo";
+    option (protoc_gen_nats.options.nats) = {
+      subject: "echo.echo";
+    };
   };
 }

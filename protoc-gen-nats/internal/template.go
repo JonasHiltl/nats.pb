@@ -97,10 +97,15 @@ func applyTemplate(params applyTemplateParams) (string, error) {
 
 	eps := make([]Endpoint, len(params.srv.Methods))
 	for i, mth := range params.srv.Methods {
-		subExt := proto.GetExtension(mth.Desc.Options(), options.E_Subject)
-		subj, ok := subExt.(string)
-		if !ok || subj == "" {
-			log.Fatalln("Method option 'subject' must be specified.")
+		ext := proto.GetExtension(mth.Desc.Options(), options.E_Nats)
+		opts, ok := ext.(*options.NatsOptions)
+		if !ok || opts == nil {
+			log.Fatalln("Method option 'nats' is missing.")
+		}
+
+		subj := opts.Subject
+		if subj == "" {
+			log.Fatalln("Subject property of 'nats' option must be specified.")
 		}
 
 		eps[i] = Endpoint{
