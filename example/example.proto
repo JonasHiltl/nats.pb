@@ -9,7 +9,7 @@ message Hello {
   string greeting = 1;
 }
 
-service YourService {
+service ExampleService {
   rpc Echo(Hello) returns (Hello) {
     option (nats.protoc_gen_nats.options.subject) = "echo.echo";
   };
