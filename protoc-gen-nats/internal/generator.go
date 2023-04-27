@@ -2,7 +2,6 @@ package internal
 
 import (
 	"go/format"
-	"log"
 
 	"google.golang.org/protobuf/compiler/protogen"
 )
@@ -37,7 +36,6 @@ func (g *generator) GenerateFile(gen *protogen.Plugin, file *protogen.File) (*pr
 		code, err := applyTemplate(applyTemplateParams{
 			srv: srv,
 		})
-		log.Println(code)
 		if err != nil {
 			return nil, err
 		}

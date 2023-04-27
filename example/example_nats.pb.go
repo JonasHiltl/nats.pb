@@ -52,7 +52,7 @@ func (c *exampleServiceClient) Echo(ctx context.Context, in *Hello, timeout time
 	out := new(Hello)
 	params := invokeParams{
 		ctx:     ctx,
-		subj:    "",
+		subj:    "echo.echo",
 		in:      in,
 		timeout: timeout,
 		out:     out,

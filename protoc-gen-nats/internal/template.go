@@ -2,10 +2,13 @@ package internal
 
 import (
 	"bytes"
+	"log"
 	"text/template"
 
 	"github.com/jonashiltl/proto-nats/protoc-gen-nats/internal/utils"
+	"github.com/jonashiltl/proto-nats/protoc-gen-nats/options"
 	"google.golang.org/protobuf/compiler/protogen"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
@@ -93,9 +96,19 @@ func applyTemplate(params applyTemplateParams) (string, error) {
 	w := bytes.NewBuffer(nil)
 
 	eps := make([]Endpoint, len(params.srv.Methods))
-	for i, ep := range params.srv.Methods {
-		// TODO: figure our how to read custom plugin options
-		eps[i] = Endpoint{Name: ep.GoName, InputName: ep.Input.GoIdent.GoName, OutputName: ep.Output.GoIdent.GoName}
+	for i, mth := range params.srv.Methods {
+		subExt := proto.GetExtension(mth.Desc.Options(), options.E_Subject)
+		subj, ok := subExt.(string)
+		if !ok || subj == "" {
+			log.Fatalln("Method option 'subject' must be specified.")
+		}
+
+		eps[i] = Endpoint{
+			Name:       mth.GoName,
+			InputName:  mth.Input.GoIdent.GoName,
+			OutputName: mth.Output.GoIdent.GoName,
+			Subject:    subj,
+		}
 	}
 
 	cp := clientTemplateParams{
