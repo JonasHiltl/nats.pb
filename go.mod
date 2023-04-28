@@ -1,4 +1,4 @@
-module github.com/jonashiltl/proto-nats
+module github.com/jonashiltl/natspb
 
 go 1.20
 

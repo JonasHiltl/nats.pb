@@ -6,7 +6,7 @@ import (
 	"context"
 	"time"
 
-	transport "github.com/jonashiltl/proto-nats/protoc-gen-nats/transport"
+	natspb "github.com/jonashiltl/natspb"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -15,10 +15,10 @@ type ExampleServiceClient interface {
 }
 
 type exampleServiceClient struct {
-	tr transport.Transport
+	tr natspb.Transport
 }
 
-func NewExampleServiceClient(tr transport.Transport) ExampleServiceClient {
+func NewExampleServiceClient(tr natspb.Transport) ExampleServiceClient {
 	return &exampleServiceClient{tr}
 }
 

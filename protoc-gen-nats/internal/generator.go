@@ -27,7 +27,7 @@ func (g *generator) GenerateFile(gen *protogen.Plugin, file *protogen.File) (*pr
 			"context"
 			"time"
 			
-			transport "github.com/jonashiltl/proto-nats/protoc-gen-nats/transport"
+			natspb "github.com/jonashiltl/natspb"
 			proto "google.golang.org/protobuf/proto"
 		)
 	`)

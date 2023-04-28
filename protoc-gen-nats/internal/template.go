@@ -5,8 +5,8 @@ import (
 	"log"
 	"text/template"
 
-	"github.com/jonashiltl/proto-nats/protoc-gen-nats/internal/utils"
-	"github.com/jonashiltl/proto-nats/protoc-gen-nats/options"
+	"github.com/jonashiltl/natspb/protoc-gen-nats/internal/utils"
+	"github.com/jonashiltl/natspb/protoc-gen-nats/options"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/proto"
 )
@@ -22,10 +22,10 @@ var (
 	}
 
 	type {{ toFirstLowerCase .ServiceName }}Client struct {
-		tr transport.Transport
+		tr natspb.Transport
 	}
 
-	func New{{ .ServiceName }}Client(tr transport.Transport) {{ .ServiceName }}Client {
+	func New{{ .ServiceName }}Client(tr natspb.Transport) {{ .ServiceName }}Client {
 		return &{{ toFirstLowerCase .ServiceName }}Client{tr}
 	}
 

@@ -7,7 +7,7 @@ import (
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/jonashiltl/proto-nats/protoc-gen-nats/internal"
+	"github.com/jonashiltl/natspb/protoc-gen-nats/internal"
 )
 
 func main() {
