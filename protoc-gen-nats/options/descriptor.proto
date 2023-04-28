@@ -1,14 +1,24 @@
 syntax = "proto3";
 
-package proto.nats.protoc_gen_nats.options;
+package nats.pb.protoc_gen_nats.options;
 option go_package = "github.com/jonashiltl/natspb/protoc-gen-nats/options";
 
 import "google/protobuf/descriptor.proto";
 
-extend google.protobuf.MethodOptions {
-  NatsOptions nats = 168718;
+extend google.protobuf.ServiceOptions {
+  NatsServiceOptions nats_service = 75992;
 }
 
-message NatsOptions {
+message NatsServiceOptions {
+  optional string name = 1;
+  optional string description = 2;
+  optional string version = 3;
+}
+
+extend google.protobuf.MethodOptions {
+  NatsMethodOptions nats = 168718;
+}
+
+message NatsMethodOptions {
   string subject = 1;
 }

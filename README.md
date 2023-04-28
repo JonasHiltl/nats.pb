@@ -16,14 +16,20 @@ First specify your protobuf service with the `subject` of `protoc_gen_nats.optio
 ```protobuf
 syntax = "proto3";
 
-package proto.nats.example;
+package example;
 option go_package = "github.com/jonashiltl/natspb/example";
 
 import "protoc-gen-nats/options/descriptor.proto";
 
 service ExampleService {
+    option(nats.pb.protoc_gen_nats.options.nats_service) = {
+    name: "Example";
+    description: "I'm a useful description";
+    version: "1.0.0"
+  };
+
   rpc Echo(Hello) returns (Hello) {
-    option (protoc_gen_nats.options.nats) = {
+    option (nats.pb.protoc_gen_nats.options.nats) = {
       subject: "echo.echo";
     };
   };

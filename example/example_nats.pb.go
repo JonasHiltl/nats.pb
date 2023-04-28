@@ -5,8 +5,11 @@ package example
 import (
 	"context"
 	"time"
+	"log"
 
+	nats "github.com/nats-io/nats.go"
 	natspb "github.com/jonashiltl/natspb"
+	micro "github.com/nats-io/nats.go/micro"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -62,4 +65,39 @@ func (c *exampleServiceClient) Echo(ctx context.Context, in *Hello, timeout time
 		return nil, err
 	}
 	return out, nil
+}
+
+type ExampleServiceServer interface {
+	Echo(ctx context.Context, in *Hello) (*Hello, error)
+}
+
+func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer) (micro.Service, error) {
+	s, err := micro.AddService(nc, micro.Config{
+		Name:        "Example",
+		Description: "I'm a useful description",
+		Version:     "1.0.0",
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// TODO: decide how to allow passing in context
+	err = s.AddEndpoint("Echo", micro.ContextHandler(context.Background(), _ExampleService_Echo_Handler(srv.Echo)))
+	if err != nil {
+		log.Println(err)
+	}
+
+	return s, nil
+}
+
+func _ExampleService_Echo_Handler(mth func(context.Context, *Hello) (*Hello, error)) func(context.Context, micro.Request) {
+	return func(ctx context.Context, r micro.Request) {
+		in := new(Hello)
+		err := proto.Unmarshal(r.Data(), in)
+
+		msg, err := mth(ctx, in)
+
+		res, err := proto.Marshal(msg)
+		err = r.Respond(res)
+	}
 }
