@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package nats.pb.protoc_gen_nats.options;
-option go_package = "github.com/jonashiltl/nats.pb/protoc-gen-nats/options";
+option go_package = "github.com/jonashiltl/nats.pb/protoc-gen-go-nats/options";
 
 import "google/protobuf/descriptor.proto";
 

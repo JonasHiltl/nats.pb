@@ -3,7 +3,7 @@ syntax = "proto3";
 package example;
 option go_package = "github.com/jonashiltl/nats.pb/example";
 
-import "protoc-gen-nats/options/descriptor.proto";
+import "protoc-gen-go-nats/options/descriptor.proto";
 
 message Hello {
   string greeting = 1;
