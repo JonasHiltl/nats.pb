@@ -5,8 +5,8 @@ import (
 	"log"
 	"text/template"
 
-	"github.com/jonashiltl/natspb/protoc-gen-nats/internal/utils"
-	"github.com/jonashiltl/natspb/protoc-gen-nats/options"
+	"github.com/jonashiltl/nats.pb/protoc-gen-nats/internal/utils"
+	"github.com/jonashiltl/nats.pb/protoc-gen-nats/options"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/proto"
 )

@@ -8,7 +8,7 @@ import (
 	"log"
 
 	nats "github.com/nats-io/nats.go"
-	natspb "github.com/jonashiltl/natspb"
+	natspb "github.com/jonashiltl/nats.pb"
 	micro "github.com/nats-io/nats.go/micro"
 	proto "google.golang.org/protobuf/proto"
 )

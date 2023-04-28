@@ -1,4 +1,4 @@
-module github.com/jonashiltl/natspb
+module github.com/jonashiltl/nats.pb
 
 go 1.20
 

@@ -7,7 +7,7 @@ Combined with protobuf as the data serialization format, `natspb` provides a sim
 
 ## Installation
 ```
-go get github.com/jonashiltl/natspb
+go get github.com/jonashiltl/nats.pb
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ First specify your protobuf service with the `subject` of `protoc_gen_nats.optio
 syntax = "proto3";
 
 package example;
-option go_package = "github.com/jonashiltl/natspb/example";
+option go_package = "github.com/jonashiltl/nats.pb/example";
 
 import "protoc-gen-nats/options/descriptor.proto";
 
