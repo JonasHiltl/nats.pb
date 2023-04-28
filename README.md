@@ -56,7 +56,7 @@ protoc -I . --go-nats_out ./gen/go \
 ```
 
 First specify your protobuf service with the `subject` of `protoc_gen_nats.options.nats` for each method set.  
-You can optionally set the `protoc_gen_nats.options.nats_service` options which will be used when registering your service on NATS.
+You can optionally set the `protoc_gen_nats.options.nats_service` for each service which will be used when registering your service on NATS.
 
 ```protobuf
 syntax = "proto3";
