@@ -11,7 +11,8 @@ go get github.com/jonashiltl/nats.pb
 ```
 
 ## Usage
-First specify your protobuf service with the `subject` of `protoc_gen_nats.options.nats` for each method set.
+First specify your protobuf service with the `subject` of `protoc_gen_nats.options.nats` for each method set.  
+You can optionally set the `protoc_gen_nats.options.nats_service` options which will be used when registering your service on NATS.
 
 ```protobuf
 syntax = "proto3";
@@ -22,7 +23,7 @@ option go_package = "github.com/jonashiltl/nats.pb/example";
 import "protoc-gen-nats/options/descriptor.proto";
 
 service ExampleService {
-    option(nats.pb.protoc_gen_nats.options.nats_service) = {
+  option(nats.pb.protoc_gen_nats.options.nats_service) = {
     name: "Example";
     description: "I'm a useful description";
     version: "1.0.0"
