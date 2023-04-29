@@ -57,7 +57,7 @@ var (
 
 	{{ range .Handlers -}}
 		func (c *{{ toFirstLowerCase $.GoServiceName }}Client) {{ .Name }}(ctx context.Context, in *{{ .RequestName }}, timeout time.Duration) (*{{ .ResponseName }}, error) {
-			out := new({{ .RequestName }})
+			out := new({{ .ResponseName }})
 			params := invokeParams{
 				ctx: ctx,
 				subj: "{{ .Subject }}",
