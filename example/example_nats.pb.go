@@ -11,6 +11,7 @@ import (
 	natspb "github.com/jonashiltl/nats.pb"
 	micro "github.com/nats-io/nats.go/micro"
 	proto "google.golang.org/protobuf/proto"
+	prototext "google.golang.org/protobuf/encoding/prototext"
 )
 
 type ExampleServiceClient interface {
@@ -82,7 +83,14 @@ func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer) (micr
 	}
 
 	// TODO: decide how to allow passing in context
-	err = s.AddEndpoint("Echo", micro.ContextHandler(context.Background(), _ExampleService_Echo_Handler(srv.Echo)))
+	err = s.AddEndpoint(
+		"Echo",
+		micro.ContextHandler(context.Background(), _ExampleService_Echo_Handler(srv.Echo)),
+		micro.WithEndpointSchema(&micro.Schema{
+			Request:  prototext.Format(new(Hello)),
+			Response: prototext.Format(new(Hello)),
+		}),
+	)
 	if err != nil {
 		log.Println(err)
 	}

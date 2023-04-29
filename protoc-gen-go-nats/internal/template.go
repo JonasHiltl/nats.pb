@@ -93,7 +93,14 @@ var (
 
 		{{ range .Handlers -}}
 			// TODO: decide how to allow passing in context
-			err = s.AddEndpoint("{{ .Name }}", micro.ContextHandler(context.Background(),  _{{ $.GoServiceName }}_{{ .Name }}_Handler(srv.{{ .Name }})))
+			err = s.AddEndpoint(
+				"{{ .Name }}",
+				micro.ContextHandler(context.Background(),  _{{ $.GoServiceName }}_{{ .Name }}_Handler(srv.{{ .Name }})),
+				micro.WithEndpointSchema(&micro.Schema{
+					Request: prototext.Format(new({{ .RequestName }})),
+					Response: prototext.Format(new({{ .ResponseName }})),
+				}),
+			)
 			if err != nil {
 				log.Println(err)
 			}
