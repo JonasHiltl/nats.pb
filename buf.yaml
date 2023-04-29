@@ -1,0 +1,8 @@
+version: v1
+name: buf.build/jonas/nats
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

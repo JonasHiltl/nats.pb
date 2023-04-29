@@ -84,3 +84,14 @@ message Hello {
   string greeting = 1;
 }
 ```
+> ### Annotations
+> To use the nats specific method and service annotations, add `buf.build/jonas/nats` to your `buf.yaml` dependencies.
+> ```
+> version: v1
+> name: ...
+> deps:
+>   - buf.build/jonas/nats
+> ```
+> Always run `buf mod update` after adding a dependency to your `buf.yaml`.
+>
+> If your using `protoc` you need to manually copy [protoc-gen-go-nats/options/descriptor.proto](https://github.com/JonasHiltl/nats.pb/blob/main/protoc-gen-go-nats/options/descriptor.proto) and provide them to protoc when generating your stubs.
