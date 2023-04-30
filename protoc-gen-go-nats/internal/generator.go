@@ -31,7 +31,7 @@ func (g *generator) GenerateFile(gen *protogen.Plugin, file *protogen.File) (*pr
 			natspb "github.com/jonashiltl/nats.pb"
 			micro "github.com/nats-io/nats.go/micro"		
 			proto "google.golang.org/protobuf/proto"
-			prototext "google.golang.org/protobuf/encoding/prototext"
+			protodesc "google.golang.org/protobuf/reflect/protodesc"
 		)
 	`)
 

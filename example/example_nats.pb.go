@@ -10,7 +10,7 @@ import (
 	natspb "github.com/jonashiltl/nats.pb"
 	micro "github.com/nats-io/nats.go/micro"
 	proto "google.golang.org/protobuf/proto"
-	prototext "google.golang.org/protobuf/encoding/prototext"
+	protodesc "google.golang.org/protobuf/reflect/protodesc"
 )
 
 type ExampleServiceClient interface {
@@ -86,8 +86,8 @@ func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer) (micr
 		"Echo",
 		micro.ContextHandler(context.Background(), _ExampleService_Echo_Handler(srv.Echo)),
 		micro.WithEndpointSchema(&micro.Schema{
-			Request:  prototext.Format(new(Hello)),
-			Response: prototext.Format(new(Hello)),
+			Request:  protodesc.ToDescriptorProto(new(Hello).ProtoReflect().Descriptor()).String(),
+			Response: protodesc.ToDescriptorProto(new(Hello).ProtoReflect().Descriptor()).String(),
 		}),
 	)
 	if err != nil {
