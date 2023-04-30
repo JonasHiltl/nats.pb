@@ -81,14 +81,37 @@ var (
 		{{ end }}
 	}
 
-	func Register{{ .GoServiceName }}Server(nc *nats.Conn, srv {{ .GoServiceName }}Server) (micro.Service, error) {
-		s, err := micro.AddService(nc, micro.Config{
+	type Option func(cfg *micro.Config)
+
+	func WithDoneHandler(h micro.DoneHandler) Option {
+		return func(cfg *micro.Config) {
+			cfg.DoneHandler = h
+		}
+	}
+	func WithErrHandler(h micro.ErrHandler) Option {
+		return func(cfg *micro.Config) {
+			cfg.ErrorHandler = h
+		}
+	}
+	func WithStatsHandler(h micro.StatsHandler) Option {
+		return func(cfg *micro.Config) {
+			cfg.StatsHandler = h
+		}
+	}
+
+	func Register{{ .GoServiceName }}Server(nc *nats.Conn, srv {{ .GoServiceName }}Server, opts ...Option) (micro.Service, error) {
+		cfg := micro.Config{
 			Name: "{{ .MicroServiceName }}",
 			Description: "{{ .MicroServiceDesc }}",
 			Version: "{{ .MicroServiceVersion }}",
-		})
+		}
+		s, err := micro.AddService(nc, cfg)
 		if err != nil {
 			return nil, err
+		}
+
+		for _, opt := range opts {
+			opt(&cfg)
 		}
 
 		{{ range .Handlers -}}

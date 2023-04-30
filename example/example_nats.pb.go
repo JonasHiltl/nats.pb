@@ -71,14 +71,37 @@ type ExampleServiceServer interface {
 	Echo(ctx context.Context, in *Hello) (*Hello, error)
 }
 
-func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer) (micro.Service, error) {
-	s, err := micro.AddService(nc, micro.Config{
+type Option func(cfg *micro.Config)
+
+func WithDoneHandler(h micro.DoneHandler) Option {
+	return func(cfg *micro.Config) {
+		cfg.DoneHandler = h
+	}
+}
+func WithErrHandler(h micro.ErrHandler) Option {
+	return func(cfg *micro.Config) {
+		cfg.ErrorHandler = h
+	}
+}
+func WithStatsHandler(h micro.StatsHandler) Option {
+	return func(cfg *micro.Config) {
+		cfg.StatsHandler = h
+	}
+}
+
+func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer, opts ...Option) (micro.Service, error) {
+	cfg := micro.Config{
 		Name:        "Example",
 		Description: "I'm a useful description",
 		Version:     "1.0.0",
-	})
+	}
+	s, err := micro.AddService(nc, cfg)
 	if err != nil {
 		return nil, err
+	}
+
+	for _, opt := range opts {
+		opt(&cfg)
 	}
 
 	// TODO: decide how to allow passing in context
