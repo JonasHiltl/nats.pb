@@ -114,12 +114,12 @@ var (
 		func _{{ $.GoServiceName }}_{{ .Name }}_Handler(mth func(context.Context, *{{ .RequestName }}) (*{{ .ResponseName }}, error)) func(context.Context, micro.Request) {
 			return func(ctx context.Context, r micro.Request) {
 				in := new({{.RequestName}})
-				err := proto.Unmarshal(r.Data(), in)
+				_ = proto.Unmarshal(r.Data(), in)
 
-				msg, err := mth(ctx, in)
+				msg, _ := mth(ctx, in)
 
-				res, err := proto.Marshal(msg)
-				err = r.Respond(res)
+				res, _ := proto.Marshal(msg)
+				_ = r.Respond(res)
 			}
 		}
 	{{ end }}
