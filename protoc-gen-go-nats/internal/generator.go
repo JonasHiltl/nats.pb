@@ -26,7 +26,6 @@ func (g *generator) GenerateFile(gen *protogen.Plugin, file *protogen.File) (*pr
 		import (
 			"context"
 			"time"
-			"log"
 			
 			nats "github.com/nats-io/nats.go"
 			natspb "github.com/jonashiltl/nats.pb"

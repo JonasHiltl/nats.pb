@@ -5,7 +5,6 @@ package example
 import (
 	"context"
 	"time"
-	"log"
 
 	nats "github.com/nats-io/nats.go"
 	natspb "github.com/jonashiltl/nats.pb"
@@ -92,7 +91,7 @@ func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer) (micr
 		}),
 	)
 	if err != nil {
-		log.Println(err)
+		return nil, err
 	}
 
 	return s, nil

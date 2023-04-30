@@ -102,7 +102,7 @@ var (
 				}),
 			)
 			if err != nil {
-				log.Println(err)
+				return nil, err
 			}
 		{{ end }}
 
