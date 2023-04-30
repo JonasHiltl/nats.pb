@@ -123,6 +123,7 @@ var (
 					Request: protodesc.ToDescriptorProto(new({{ .RequestName }}).ProtoReflect().Descriptor()).String(),
 					Response: protodesc.ToDescriptorProto(new({{ .ResponseName }}).ProtoReflect().Descriptor()).String(),
 				}),
+				micro.WithEndpointSubject("{{ .Subject }}"),
 			)
 			if err != nil {
 				return nil, err

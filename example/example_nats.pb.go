@@ -112,6 +112,7 @@ func RegisterExampleServiceServer(nc *nats.Conn, srv ExampleServiceServer, opts 
 			Request:  protodesc.ToDescriptorProto(new(Hello).ProtoReflect().Descriptor()).String(),
 			Response: protodesc.ToDescriptorProto(new(Hello).ProtoReflect().Descriptor()).String(),
 		}),
+		micro.WithEndpointSubject("echo.echo"),
 	)
 	if err != nil {
 		return nil, err
